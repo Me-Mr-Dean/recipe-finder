@@ -18,12 +18,12 @@ If your GitHub isn't setup correctly in your Visual Studio and commits are made 
    ```sh
    cd .\recipe-finder
    ```
-3. Run the following command to make sure it is using the correct credentials.
+2. Run the following command to make sure it is using the correct credentials.
    ```sh
    git config --global user.name
    git config --global user.email
    ```
-5. If it isn't correct, use the following commands to change it.
+3. If it isn't correct, use the following commands to change it.
    ```sh
    git config user.name "Your Name"
    git config user.email "your.email@example.com"
