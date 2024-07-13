@@ -15,13 +15,19 @@ This is a Recipe Finder application built using React for the frontend and Pytho
 If your GitHub isn't setup correctly in your Visual Studio and commits are made from the wrong account, do the following:
 
 1. Make sure you are in the correct directory, it should contain the .git file.
+   ```sh
    cd .\recipe-finder
-2. Run the following command to make sure it is using the correct credentials.
+   ```
+3. Run the following command to make sure it is using the correct credentials.
+   ```sh
    git config --global user.name
    git config --global user.email
-3. If it isn't correct, use the following commands to change it.
+   ```
+5. If it isn't correct, use the following commands to change it.
+   ```sh
    git config user.name "Your Name"
    git config user.email "your.email@example.com"
+   ```
 
 https://www.enterprisedb.com/downloads/postgres-postgresql-downloads
 
