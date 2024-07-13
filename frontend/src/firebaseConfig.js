@@ -1,21 +1,30 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider } from "firebase/auth";
-import dotenv from "dotenv";
 
-dotenv.config();
+console.log("API Key:", process.env.REACT_APP_FIREBASE_API_KEY);
+console.log("Auth Domain:", process.env.REACT_APP_FIREBASE_AUTHDOMAIN);
+console.log("Project ID:", process.env.REACT_APP_FIREBASE_PROJECTID);
+console.log("Storage Bucket:", process.env.REACT_APP_FIREBASE_STORAGEBUCKET);
+console.log(
+  "Messaging Sender ID:",
+  process.env.REACT_APP_FIREBASE_MESSAGINGSENDERID
+);
+console.log("App ID:", process.env.REACT_APP_FIREBASE_APP_ID);
+console.log("Measurement ID:", process.env.REACT_APP_FIREBASE_MEASUREMENTID);
 
 const firebaseConfig = {
-  apiKey: process.env.FIREBASE_API_KEY,
-  authDomain: process.env.FIREBASE_AUTHDOMAIN,
-  projectId: process.env.FIREBASE_PROJECTID,
-  storageBucket: process.env.FIREBASE_STORAGEBUCKET,
-  messagingSenderId: process.env.FIREBASE_MESSAGINGSENDERID,
-  appId: process.env.FIREBASE_APPID,
-  measurementId: process.env.FIREBASE_MEASUREMENTID,
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  authDomain: process.env.REACT_APP_FIREBASE_AUTHDOMAIN,
+  projectId: process.env.REACT_APP_FIREBASE_PROJECTID,
+  storageBucket: process.env.REACT_APP_FIREBASE_STORAGEBUCKET,
+  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGINGSENDERID,
+  appId: process.env.REACT_APP_FIREBASE_APP_ID,
+  measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENTID,
 };
 
 const app = initializeApp(firebaseConfig);
 
-export const auth = getAuth(app);
-//export const analytics = getAnalytics(app);
-export const googleProvider = new GoogleAuthProvider();
+const auth = getAuth(app);
+const googleProvider = new GoogleAuthProvider();
+
+export { auth, googleProvider };
