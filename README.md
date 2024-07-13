@@ -1,1 +1,34 @@
-# recipe-finder
+# Recipe Finder Application
+
+This is a Recipe Finder application built using React for the frontend and Python(Flask) for the backend.
+
+## Table of Contents
+
+- [Installation](#installation)
+- [Setup](#setup)
+- [Running the Application](#running-the-application)
+- [Troubleshooting](#troubleshooting)
+- [Known Issues](#known-issues)
+
+## Installation
+
+If your GitHub isn't setup correctly in your Visual Studio and commits are made from the wrong account, do the following:
+
+1. Make sure you are in the correct directory, it should contain the .git file.
+   cd .\recipe-finder
+2. Run the following command to make sure it is using the correct credentials.
+   git config --global user.name
+   git config --global user.email
+3. If it isn't correct, use the following commands to change it.
+   git config user.name "Your Name"
+   git config user.email "your.email@example.com"
+
+https://www.enterprisedb.com/downloads/postgres-postgresql-downloads
+
+### Frontend
+
+1. **Install Node.js and npm**: Download and install from [Node.js](https://nodejs.org/).
+2. **Create React App**:
+   ```sh
+   npx create-react-app recipe-finder
+   ```
