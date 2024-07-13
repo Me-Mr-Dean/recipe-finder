@@ -28,7 +28,16 @@ https://www.enterprisedb.com/downloads/postgres-postgresql-downloads
 ### Frontend
 
 1. **Install Node.js and npm**: Download and install from [Node.js](https://nodejs.org/).
+
+I had trouble with Node.js version 17, the solution was to use version 16. To do this download the .exe file for Node Version Manager from the following link and allow it to manage which version of node your computer is using.
+https://github.com/coreybutler/nvm-windows/releases
+
+Afterwards run the following commands in you command prompt.
+nvm install 16
+nvm use 16
+
 2. **Create React App**:
+
    ```sh
    npx create-react-app recipe-finder
    ```
