@@ -1,15 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Drawer,
+  IconButton,
   List,
   ListItem,
   ListItemText,
-  IconButton,
 } from "@mui/material";
-import MenuIcon from "@mui/icons-material/Menu"; // Correct import
+import MenuIcon from "@mui/icons-material/Menu";
+import "./NavigationDrawer.css";
 
 const NavigationDrawer = () => {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = React.useState(false);
 
   const toggleDrawer = (open) => (event) => {
     if (
@@ -22,29 +23,32 @@ const NavigationDrawer = () => {
   };
 
   return (
-    <>
+    <div>
       <IconButton
         edge="start"
         color="inherit"
-        aria-label="menu"
         onClick={toggleDrawer(true)}
+        aria-label="menu"
       >
         <MenuIcon />
       </IconButton>
       <Drawer anchor="left" open={open} onClose={toggleDrawer(false)}>
-        <List>
-          <ListItem button>
-            <ListItemText primary="Home" />
-          </ListItem>
-          <ListItem button>
-            <ListItemText primary="Favorites" />
-          </ListItem>
-          <ListItem button>
-            <ListItemText primary="Add Recipe" />
-          </ListItem>
-        </List>
+        <div
+          className="drawer-content"
+          role="presentation"
+          onClick={toggleDrawer(false)}
+          onKeyDown={toggleDrawer(false)}
+        >
+          <List>
+            {["Home", "Favorites", "Add Recipe"].map((text, index) => (
+              <ListItem button key={text}>
+                <ListItemText primary={text} />
+              </ListItem>
+            ))}
+          </List>
+        </div>
       </Drawer>
-    </>
+    </div>
   );
 };
 

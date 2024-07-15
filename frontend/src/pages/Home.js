@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Box } from "@mui/material";
+import { Box, TextField, Button } from "@mui/material";
+import "./Home.css";
 
 const images = [
   "url('/Images/Background1.jpg')",
@@ -34,10 +35,37 @@ const Home = () => {
         backgroundImage: images[currentImageIndex],
         backgroundRepeat: "no-repeat",
         transition: "background-image 1s ease-in-out",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
       }}
     >
-      {/* Content goes here */}
-      Home Page Content
+      <Box
+        className="search-box"
+        sx={{ display: "flex", alignItems: "center" }}
+      >
+        <TextField
+          variant="outlined"
+          placeholder="Search for recipes..."
+          sx={{
+            borderRadius: "25px !important",
+            backgroundColor: "white",
+            flexGrow: 1,
+            marginRight: 1,
+          }}
+        />
+        <Button
+          variant="contained"
+          sx={{
+            borderRadius: "25px",
+            backgroundColor: "#1976d2",
+            color: "white",
+            padding: "10px 20px",
+          }}
+        >
+          Search
+        </Button>
+      </Box>
     </Box>
   );
 };

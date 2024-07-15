@@ -1,0 +1,19 @@
+.drawer-content {
+  width: 250px;
+  background: linear-gradient(
+    rgba(0, 0, 0, 0.9),
+    rgba(0, 0, 0, 0.7),
+    rgba(0, 0, 0, 0.5),
+    rgba(0, 0, 0, 0)
+  );
+  color: white;
+  height: 100%;
+}
+
+.MuiDrawer-paper {
+  background: transparent;
+}
+
+.MuiBackdrop-root {
+  background-color: rgba(0, 0, 0, 0.3);
+}
