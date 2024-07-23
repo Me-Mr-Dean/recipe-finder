@@ -6,6 +6,9 @@ const images = [
   "url('/Images/Background1.jpg')",
   "url('/Images/Background2.jpg')",
   "url('/Images/Background3.jpg')",
+  "url('/Images/Background4.jpg')",
+  "url('/Images/Background5.jpg')",
+  "url('/Images/Background6.jpeg')",
   // Add more images as needed
 ];
 
@@ -36,13 +39,14 @@ const Home = () => {
         backgroundRepeat: "no-repeat",
         transition: "background-image 1s ease-in-out",
         display: "flex",
-        justifyContent: "center",
+        flexDirection: "column",
+        justifyContent: "flex-start", // Align items to the top
         alignItems: "center",
       }}
     >
       <Box
         className="search-box"
-        sx={{ display: "flex", alignItems: "center" }}
+        sx={{ display: "flex", alignItems: "center", mt: 2 }} // Added margin-top to separate from the top
       >
         <TextField
           variant="outlined"
@@ -66,6 +70,7 @@ const Home = () => {
           Search
         </Button>
       </Box>
+      {/* Additional Content */}
     </Box>
   );
 };
