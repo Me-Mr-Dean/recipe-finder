@@ -1,5 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { Box, TextField, Button } from "@mui/material";
+import {
+  Box,
+  TextField,
+  Button,
+  Card,
+  CardContent,
+  Typography,
+  Accordion,
+  AccordionSummary,
+  AccordionDetails,
+} from "@mui/material";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import axios from "axios";
 import "./Home.css";
 
 const images = [
@@ -14,6 +26,9 @@ const images = [
 
 const Home = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [query, setQuery] = useState("");
+  const [recipes, setRecipes] = useState([]);
+  const [instructions, setInstructions] = useState([]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -24,7 +39,41 @@ const Home = () => {
     return () => clearInterval(interval);
   }, []);
 
-  console.log("Current Image Index:", currentImageIndex); // Debugging
+  const handleSearch = async () => {
+    try {
+      const response = await axios.get("http://localhost:5000/search", {
+        params: { query },
+      });
+      console.log("API response: ", response.data); // For debugging purposes
+      if (Array.isArray(response.data)) {
+        setRecipes(response.data);
+      } else {
+        console.error("Unexpected response structure: ", response.data);
+        setRecipes([]); // Clear the recipes if the structure is unexpected
+      }
+    } catch (error) {
+      console.error("There was an error fetching the recipes!", error);
+      setRecipes([]); // Clear the recipes in case of an error
+    }
+  };
+
+  const handleExpandClick = async (recipeId) => {
+    try {
+      const response = await axios.get("http://localhost:5000/instructions", {
+        params: { recipe_id: recipeId },
+      });
+      console.log("API response: ", response.data); // For debugging purposes
+      if (response.data.length > 0) {
+        setInstructions(response.data[0].steps);
+      } else {
+        console.error("Unexpected response structure: ", response.data);
+        setInstructions([]); // Clear the instructions if the structure is unexpected
+      }
+    } catch (error) {
+      console.error("There was an error fetching the instructions!", error);
+      setInstructions([]); // Clear the instructions in case of an error
+    }
+  };
 
   return (
     <Box
@@ -40,17 +89,18 @@ const Home = () => {
         transition: "background-image 1s ease-in-out",
         display: "flex",
         flexDirection: "column",
-        justifyContent: "flex-start", // Align items to the top
         alignItems: "center",
       }}
     >
       <Box
         className="search-box"
-        sx={{ display: "flex", alignItems: "center", mt: 2 }} // Added margin-top to separate from the top
+        sx={{ display: "flex", alignItems: "center", mt: 2 }}
       >
         <TextField
           variant="outlined"
           placeholder="Search for recipes..."
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
           sx={{
             borderRadius: "25px !important",
             backgroundColor: "white",
@@ -66,11 +116,61 @@ const Home = () => {
             color: "white",
             padding: "10px 20px",
           }}
+          onClick={handleSearch}
         >
           Search
         </Button>
       </Box>
-      {/* Additional Content */}
+      <Box className="recipes-container">
+        <div
+          style={{
+            alignItems: "center",
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
+          {recipes.length > 0 ? (
+            recipes.map((recipe) => (
+              <Accordion
+                key={recipe.id}
+                className="card"
+                onChange={() => handleExpandClick(recipe.id)}
+              >
+                <AccordionSummary
+                  expandIcon={<ExpandMoreIcon />}
+                  aria-controls={`panel${recipe.id}-content`}
+                  id={`panel${recipe.id}-header`}
+                >
+                  <Typography variant="h5">{recipe.title}</Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                  <CardContent>
+                    <img
+                      src={recipe.image}
+                      alt={recipe.title}
+                      style={{ width: "100%", borderRadius: "8px" }}
+                    />
+                    {instructions.length > 0 && (
+                      <Box>
+                        <Typography variant="h6">Instructions:</Typography>
+                        <ul>
+                          {instructions.map((step, index) => (
+                            <li key={index}>{step.step}</li>
+                          ))}
+                        </ul>
+                      </Box>
+                    )}
+                  </CardContent>
+                </AccordionDetails>
+              </Accordion>
+            ))
+          ) : (
+            <Typography variant="h6" sx={{ mt: 2 }}>
+              No recipes found.
+            </Typography>
+          )}
+        </div>
+      </Box>
     </Box>
   );
 };
