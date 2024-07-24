@@ -41,9 +41,12 @@ const Home = () => {
 
   const handleSearch = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/search", {
-        params: { query },
-      });
+      const response = await axios.get(
+        "https://recipe-finder-backend-alpha.vercel.app/api/search",
+        {
+          params: { query },
+        }
+      );
       console.log("API response: ", response.data); // For debugging purposes
       if (Array.isArray(response.data)) {
         setRecipes(response.data);
