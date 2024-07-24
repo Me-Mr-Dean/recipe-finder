@@ -6,7 +6,7 @@ from .models import db, Recipe
 
 main = Blueprint('main', __name__)
 
-@main.route('/search', methods=['GET'])
+@main.route('/api/search', methods=['GET'])
 def search():
     query = request.args.get('query')
     cuisine = request.args.get('cuisine')
@@ -22,7 +22,7 @@ def search():
     result = search_recipes(query, cuisine, diet, intolerances, includeIngredients, excludeIngredients, number)
     return jsonify(result.get("results", result))  # Return the 'results' key if it exists
 
-@main.route('/instructions', methods=['GET'])
+@main.route('/api/instructions', methods=['GET'])
 def instructions():
     recipe_id = request.args.get('recipe_id')
     if recipe_id:
