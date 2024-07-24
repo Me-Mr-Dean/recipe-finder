@@ -62,9 +62,12 @@ const Home = () => {
 
   const handleExpandClick = async (recipeId) => {
     try {
-      const response = await axios.get("http://localhost:5000/instructions", {
-        params: { recipe_id: recipeId },
-      });
+      const response = await axios.get(
+        "https://recipe-finder-backend-alpha.vercel.app/api/instructions",
+        {
+          params: { recipe_id: recipeId },
+        }
+      );
       console.log("API response: ", response.data); // For debugging purposes
       if (response.data.length > 0) {
         setInstructions(response.data[0].steps);
