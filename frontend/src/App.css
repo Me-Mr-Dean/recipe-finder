@@ -1,50 +1,9 @@
-/* Existing Styles */
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
 body,
 html {
   margin: 0;
   padding: 0;
   width: 100%;
   height: 100%;
-  /*overflow: hidden; /* Prevent scrolling */
 }
 
 .app-container {
@@ -53,10 +12,11 @@ html {
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 100vh; /* Full viewport height */
+  height: 100vh;
   margin: 0;
   padding: 0;
-  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+  box-sizing: border-box;
+  margin-top: 64px; /* Adjust this value based on the height of your AppBar */
 }
 
 .content {
@@ -68,28 +28,15 @@ html {
   align-items: center;
 }
 
-/* Ensure the Box element takes up full width and height without any margin or padding */
-.home-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100vh;
-  margin: 0;
-  padding: 0;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  transition: background-image 1s ease-in-out;
-}
-
 .AppBar {
-  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .Toolbar {
   background-color: black;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -98,9 +45,9 @@ html {
 .Toolbar::after {
   content: "";
   position: absolute;
-  bottom: -10px; /* Adjust this value if needed */
+  bottom: -10px;
   left: 0;
   right: 0;
-  height: 20px; /* Adjust height for the shadow effect */
+  height: 20px;
   background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0));
 }

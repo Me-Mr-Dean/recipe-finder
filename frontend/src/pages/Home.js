@@ -171,12 +171,15 @@ const Home = () => {
               </Accordion>
             ))
           ) : (
-            <Typography variant="h6" sx={{ mt: 2 }}>
-              No recipes found.
-            </Typography>
+            <Typography variant="h6" sx={{ mt: 2 }}></Typography>
           )}
         </div>
       </Box>
+      {/* <Box className="footer">
+        <Typography variant="body2">
+          © 2024 Recipe Finder. All rights reserved.
+        </Typography>
+      </Box> */}
     </Box>
   );
 };
