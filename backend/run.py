@@ -1,7 +1,6 @@
 from flask import Flask
-from flask_cors import CORS
-from app import create_app
-from app.services.api_service import search_recipes
+# from flask_cors import CORS
+# from app import create_app
 
 # app = create_app()
 
