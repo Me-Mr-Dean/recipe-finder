@@ -2,9 +2,9 @@ from flask import Flask
 # from flask_cors import CORS
 from app import create_app
 
-# app = create_app()
+app = create_app()
 
-app = Flask(__name__)
+# app = Flask(__name__)
 # CORS(app)
 
 @app.route('/')
