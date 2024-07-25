@@ -12,7 +12,7 @@ CORS(app)
 def home():
     return 'Welcome to the Recipe Finder API!'
 
-if __name__ == '__main__':
+# if __name__ == '__main__':
     
-    print("App running!")
-    app.run()
+#     print("App running!")
+#     app.run()
