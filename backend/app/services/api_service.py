@@ -4,13 +4,13 @@ import requests
 from dotenv import load_dotenv
 
 # Load environment variables from .env file
-# load_dotenv()
+load_dotenv()
 
-# API_BASE_URL = os.getenv("API_BASE_URL")
-# API_KEY = os.getenv("API_KEY")
+API_BASE_URL = os.getenv("API_BASE_URL")
+API_KEY = os.getenv("API_KEY")
 
 def search_recipes(query, cuisine=None, diet=None, intolerances=None, includeIngredients=None, excludeIngredients=None, number=10):
-    url = f"https://api.spoonacular.com/recipes/complexSearch"
+    url = f"{API_BASE_URL}/recipes/complexSearch"
     params = {
         "query": query,
         "cuisine": cuisine,
@@ -19,7 +19,7 @@ def search_recipes(query, cuisine=None, diet=None, intolerances=None, includeIng
         "includeIngredients": includeIngredients,
         "excludeIngredients": excludeIngredients,
         "number": number,
-        "apiKey": "e1175b7966bf4d0f8ec2197801ebc5b8"
+        "apiKey": API_KEY
     }
     # Remove None values from params
     params = {k: v for k, v in params.items() if v is not None}
@@ -31,9 +31,9 @@ def search_recipes(query, cuisine=None, diet=None, intolerances=None, includeIng
         return jsonify({"error": "Failed to fetch recipes"}), response.status_code
 
 def get_analyzed_instructions(recipe_id):
-    url = f"https://api.spoonacular.com/recipes/{recipe_id}/analyzedInstructions"
+    url = f"{API_BASE_URL}/recipes/{recipe_id}/analyzedInstructions"
     params = {
-        "apiKey": "e1175b7966bf4d0f8ec2197801ebc5b8"
+        "apiKey": API_KEY
     }
     response = requests.get(url, params=params)
     if response.status_code == 200:

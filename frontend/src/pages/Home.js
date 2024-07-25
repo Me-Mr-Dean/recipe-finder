@@ -42,7 +42,7 @@ const Home = () => {
   const handleSearch = async () => {
     try {
       const response = await axios.get(
-        "https://recipe-finder-backend-alpha.vercel.app/api/search",
+        "https://recipe-finder-backend-alpha.vercel.app/search",
         {
           params: { query },
         }
@@ -63,7 +63,7 @@ const Home = () => {
   const handleExpandClick = async (recipeId) => {
     try {
       const response = await axios.get(
-        "https://recipe-finder-backend-alpha.vercel.app/api/instructions",
+        "https://recipe-finder-backend-alpha.vercel.app/instructions",
         {
           params: { recipe_id: recipeId },
         }
