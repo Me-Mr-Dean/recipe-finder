@@ -6,7 +6,7 @@ from app.services.api_service import search_recipes
 # app = create_app()
 
 app = Flask(__name__)
-CORS(app)
+# CORS(app)
 
 @app.route('/')
 def home():
