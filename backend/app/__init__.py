@@ -17,4 +17,8 @@ def create_app():
     # with app.app_context():
     #     db.create_all()
     print("create_app function success")
+
+    @app.route('/api')
+    def api():
+        return 'Welcome to the Recipe Finder API!'
     return app
