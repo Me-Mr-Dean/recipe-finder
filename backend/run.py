@@ -3,6 +3,11 @@ from app.services.api_service import search_recipes
 
 app = create_app()
 
+
+
 if __name__ == '__main__':
+    @app.route('/')
+    def home():
+        return 'Welcome to the Recipe Finder API!'
     print("App running!")
     app.run()

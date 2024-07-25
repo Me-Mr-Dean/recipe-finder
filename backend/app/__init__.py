@@ -18,7 +18,5 @@ def create_app():
     #     db.create_all()
     print("create_app function success")
 
-    @app.route('/')
-    def home():
-        return 'Welcome to the Recipe Finder API!'
+    
     return app
