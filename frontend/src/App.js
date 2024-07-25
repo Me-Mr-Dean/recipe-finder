@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import {
   CssBaseline,
@@ -6,23 +6,41 @@ import {
   AppBar,
   Toolbar,
   Typography,
+  IconButton,
 } from "@mui/material";
-import NavigationDrawer from "./components/NavigationDrawer";
+import FilterListIcon from "@mui/icons-material/FilterList";
 import Home from "./pages/Home";
 import Favorites from "./pages/Favorites";
-import Footer from "./components/Footer"; // Import the Footer component
+import Footer from "./components/Footer";
+import FilterDrawer from "./components/FilterDrawer";
 import "./App.css";
 
 function App() {
+  const [filterOpen, setFilterOpen] = useState(false);
+
+  const handleFilterOpen = () => {
+    setFilterOpen(true);
+  };
+
+  const handleFilterClose = () => {
+    setFilterOpen(false);
+  };
+
   return (
     <Router>
       <CssBaseline />
       <AppBar position="fixed" className="AppBar">
         <Toolbar className="Toolbar">
-          <NavigationDrawer />
           <Typography variant="h6" sx={{ flexGrow: 1 }}>
             Recipe Finder
           </Typography>
+          <IconButton
+            color="inherit"
+            onClick={handleFilterOpen}
+            aria-label="filter"
+          >
+            <FilterListIcon />
+          </IconButton>
         </Toolbar>
       </AppBar>
       <Container className="app-container" sx={{ padding: 0, marginTop: 8 }}>
@@ -33,7 +51,8 @@ function App() {
           </Routes>
         </div>
       </Container>
-      <Footer /> {/* Add the Footer component */}
+      <FilterDrawer open={filterOpen} onClose={handleFilterClose} />
+      <Footer />
     </Router>
   );
 }

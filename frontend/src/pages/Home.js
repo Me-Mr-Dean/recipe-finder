@@ -175,11 +175,6 @@ const Home = () => {
           )}
         </div>
       </Box>
-      {/* <Box className="footer">
-        <Typography variant="body2">
-          © 2024 Recipe Finder. All rights reserved.
-        </Typography>
-      </Box> */}
     </Box>
   );
 };
