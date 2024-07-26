@@ -13,6 +13,8 @@ import Home from "./pages/Home";
 import Favorites from "./pages/Favorites";
 import Footer from "./components/Footer";
 import FilterDrawer from "./components/FilterDrawer";
+import RecipeDetails from "./pages/RecipeDetails";
+import Account from "./pages/Account";
 import "./App.css";
 
 function App() {
@@ -48,6 +50,8 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/favorites" element={<Favorites />} />
+            <Route path="/recipe/:id" element={<RecipeDetails />} />
+            <Route path="/account" element={<Account />} />
           </Routes>
         </div>
       </Container>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import {
   Drawer,
   Box,
@@ -9,10 +9,13 @@ import {
   MenuItem,
   Button,
 } from "@mui/material";
+import FilterContext from "../utils/FilterContext";
+import "./FilterDrawer.css"; // Import the CSS file for additional styling
 
 const FilterDrawer = ({ open, onClose }) => {
-  const [cuisine, setCuisine] = React.useState("");
-  const [diet, setDiet] = React.useState("");
+  const { setFilters } = useContext(FilterContext);
+  const [cuisine, setCuisine] = useState("");
+  const [diet, setDiet] = useState("");
 
   const handleCuisineChange = (event) => {
     setCuisine(event.target.value);
@@ -23,14 +26,16 @@ const FilterDrawer = ({ open, onClose }) => {
   };
 
   const applyFilters = () => {
-    // Implement the logic to apply filters
+    setFilters({ cuisine, diet });
     onClose();
   };
 
   return (
     <Drawer anchor="right" open={open} onClose={onClose}>
-      <Box sx={{ width: 250, p: 2 }}>
-        <Typography variant="h6">Filters</Typography>
+      <Box className="filter-drawer" sx={{ width: 300, p: 2 }}>
+        <Typography variant="h6" className="filter-title">
+          Filters
+        </Typography>
         <FormControl fullWidth sx={{ mt: 2 }}>
           <InputLabel>Cuisine</InputLabel>
           <Select value={cuisine} onChange={handleCuisineChange}>
@@ -53,7 +58,12 @@ const FilterDrawer = ({ open, onClose }) => {
             {/* Add more options as needed */}
           </Select>
         </FormControl>
-        <Button variant="contained" sx={{ mt: 2 }} onClick={applyFilters}>
+        <Button
+          variant="contained"
+          className="apply-button"
+          onClick={applyFilters}
+          sx={{ mt: 3 }}
+        >
           Apply Filters
         </Button>
       </Box>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   Box,
   TextField,
@@ -6,13 +6,11 @@ import {
   Card,
   CardContent,
   Typography,
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
 } from "@mui/material";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import "./Home.css";
+import FilterContext from "../utils/FilterContext";
 
 const images = [
   "url('/Images/Background1.jpg')",
@@ -28,7 +26,7 @@ const Home = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [query, setQuery] = useState("");
   const [recipes, setRecipes] = useState([]);
-  const [instructions, setInstructions] = useState([]);
+  const { filters } = useContext(FilterContext);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -44,7 +42,11 @@ const Home = () => {
       const response = await axios.get(
         "https://recipe-finder-backend-alpha.vercel.app/search",
         {
-          params: { query },
+          params: {
+            query,
+            cuisine: filters.cuisine,
+            diet: filters.diet,
+          },
         }
       );
       console.log("API response: ", response.data); // For debugging purposes
@@ -57,27 +59,6 @@ const Home = () => {
     } catch (error) {
       console.error("There was an error fetching the recipes!", error);
       setRecipes([]); // Clear the recipes in case of an error
-    }
-  };
-
-  const handleExpandClick = async (recipeId) => {
-    try {
-      const response = await axios.get(
-        "https://recipe-finder-backend-alpha.vercel.app/instructions",
-        {
-          params: { recipe_id: recipeId },
-        }
-      );
-      console.log("API response: ", response.data); // For debugging purposes
-      if (response.data.length > 0) {
-        setInstructions(response.data[0].steps);
-      } else {
-        console.error("Unexpected response structure: ", response.data);
-        setInstructions([]); // Clear the instructions if the structure is unexpected
-      }
-    } catch (error) {
-      console.error("There was an error fetching the instructions!", error);
-      setInstructions([]); // Clear the instructions in case of an error
     }
   };
 
@@ -137,38 +118,37 @@ const Home = () => {
         >
           {recipes.length > 0 ? (
             recipes.map((recipe) => (
-              <Accordion
+              <Link
+                to={`/recipe/${recipe.id}`}
+                state={{ title: recipe.title, image: recipe.image }}
+                style={{
+                  textDecoration: "none",
+                  color: "inherit",
+                  width: "90%",
+                }}
                 key={recipe.id}
-                className="card"
-                onChange={() => handleExpandClick(recipe.id)}
               >
-                <AccordionSummary
-                  expandIcon={<ExpandMoreIcon />}
-                  aria-controls={`panel${recipe.id}-content`}
-                  id={`panel${recipe.id}-header`}
+                <Card
+                  className="card"
+                  sx={{
+                    cursor: "pointer",
+                    width: "100%",
+                    maxWidth: 600,
+                    mb: 2,
+                  }}
                 >
-                  <Typography variant="h5">{recipe.title}</Typography>
-                </AccordionSummary>
-                <AccordionDetails>
                   <CardContent>
+                    <Typography variant="h5" sx={{ fontWeight: "bold" }}>
+                      {recipe.title}
+                    </Typography>
                     <img
                       src={recipe.image}
                       alt={recipe.title}
                       style={{ width: "100%", borderRadius: "8px" }}
                     />
-                    {instructions.length > 0 && (
-                      <Box>
-                        <Typography variant="h6">Instructions:</Typography>
-                        <ul>
-                          {instructions.map((step, index) => (
-                            <li key={index}>{step.step}</li>
-                          ))}
-                        </ul>
-                      </Box>
-                    )}
                   </CardContent>
-                </AccordionDetails>
-              </Accordion>
+                </Card>
+              </Link>
             ))
           ) : (
             <Typography variant="h6" sx={{ mt: 2 }}></Typography>

@@ -1,0 +1,23 @@
+.filter-drawer {
+  background-color: #f7f7f7; /* Light background color for contrast */
+  height: 100%;
+  padding: 20px;
+}
+
+.filter-title {
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.apply-button {
+  background-color: #1976d2;
+  color: white;
+  width: 100%;
+  padding: 10px 0;
+  font-weight: bold;
+}
+
+.apply-button:hover {
+  background-color: #155a99;
+}
